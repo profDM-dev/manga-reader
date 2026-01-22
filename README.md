@@ -1,6 +1,6 @@
 # YoruManga - Project Complete
 
-Live Demo: https://profdm-dev.github.io/manga-reader/Manga_reader/
+Live Demo: https:[Launch Yorumanga](//profdm-dev.github.io/manga-reader/Manga_reader/)
 
 ## What Has Been Built
 
