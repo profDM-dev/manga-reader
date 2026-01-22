@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manga Details - YoruManga</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .font-main {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        secondary: '#1f2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 font-main transition-colors duration-300">
+    
+    <!-- Header/Navbar -->
+    <header class="sticky top-0 z-40 bg-white dark:bg-gray-800 shadow-md transition-colors duration-300">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center space-x-2 group">
+                    <div class="text-3xl font-black text-red-500 font-japanese transform group-hover:scale-110 transition-transform">
+                        夜
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800 dark:text-white font-japanese">YoruManga</span>
+                </a>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors font-semibold">
+                        Home
+                    </a>
+                    <a href="library.html" class="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors font-semibold">
+                        Library
+                    </a>
+                    
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                    
+                    <div id="authButtons" class="flex items-center space-x-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors font-semibold">
+                            Login
+                        </a>
+                        <a href="login.html?mode=register" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-semibold">
+                            Sign Up
+                        </a>
+                    </div>
+                    
+                    <div id="userMenuBtn" class="relative hidden">
+                        <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span class="font-semibold text-gray-800 dark:text-white"></span>
+                        </button>
+                        <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 hidden">
+                            <a href="library.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                My Library
+                            </a>
+                            <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Manga Details Section -->
+        <div id="mangaDetails">
+            <!-- Content loaded by manga.js -->
+        </div>
+
+        <!-- Chapters Section -->
+        <section class="mt-12">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6 font-japanese">Chapters</h2>
+            <div id="chaptersList">
+                <!-- Chapters loaded by manga.js -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 mt-20 py-8 border-t border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-600 dark:text-gray-400 mb-2">
+                <span class="font-japanese font-bold text-red-500">YoruManga</span> - Your Gateway to Manga
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-500">
+                Powered by MangaDex API | All content belongs to their respective owners
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/manga.js"></script>
+</body>
+</html>

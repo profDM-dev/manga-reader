@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoruManga - Read Manga Online</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts - Japanese-inspired typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .font-main {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    
+    <script>
+        // Tailwind config
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        secondary: '#1f2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 font-main transition-colors duration-300">
+    
+    <!-- Header/Navbar -->
+    <header class="sticky top-0 z-40 bg-white dark:bg-gray-800 shadow-md transition-colors duration-300">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center space-x-2 group">
+                    <div class="text-3xl font-black text-red-500 font-japanese transform group-hover:scale-110 transition-transform">
+                        夜
+                    </div>
+                    <span class="text-2xl font-bold text-gray-800 dark:text-white font-japanese">YoruManga</span>
+                </a>
+                
+                <!-- Nav Links -->
+                <div class="flex items-center space-x-4">
+                    <a href="index.html" class="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors font-semibold">
+                        Home
+                    </a>
+                    <a href="library.html" class="text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors font-semibold">
+                        Library
+                    </a>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button id="darkModeToggle" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                        <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Auth Buttons (shown when not logged in) -->
+                    <div id="authButtons" class="flex items-center space-x-2">
+                        <a href="login.html" class="px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-red-500 dark:hover:text-red-400 transition-colors font-semibold">
+                            Login
+                        </a>
+                        <a href="login.html?mode=register" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-semibold">
+                            Sign Up
+                        </a>
+                    </div>
+                    
+                    <!-- User Menu (shown when logged in) -->
+                    <div id="userMenuBtn" class="relative hidden">
+                        <button class="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                            <svg class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                            <span class="font-semibold text-gray-800 dark:text-white"></span>
+                        </button>
+                        <div id="userDropdown" class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 hidden">
+                            <a href="library.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                My Library
+                            </a>
+                            <button id="logoutBtn" class="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700">
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        
+        <!-- Hero Section -->
+        <section class="mb-12 text-center">
+            <h1 class="text-5xl md:text-6xl font-black text-gray-800 dark:text-white mb-4 font-japanese">
+                Discover Amazing Manga
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
+                Read thousands of manga titles in English, all in one place
+            </p>
+        </section>
+
+        <!-- Browse by Genre - 500+ Manga Links -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-red-500 to-red-600 dark:from-red-600 dark:to-red-700 rounded-2xl p-8 shadow-xl">
+                <h2 class="text-3xl font-bold text-white mb-3 font-japanese flex items-center">
+                    <svg class="w-8 h-8 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"></path>
+                    </svg>
+                    Browse 500+ Manga by Genre
+                </h2>
+                <p class="text-white/90 text-sm mb-6">Click any manga title to search instantly. Total: <span id="totalMangaCount" class="font-bold">500+</span> titles across 16 genres</p>
+                
+                <!-- Genre Tabs -->
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button onclick="showGenre('all')" class="genre-tab active px-4 py-2 bg-white text-red-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        All (<span id="count-all">0</span>)
+                    </button>
+                    <button onclick="showGenre('action')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Action (<span id="count-action">0</span>)
+                    </button>
+                    <button onclick="showGenre('romance')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Romance (<span id="count-romance">0</span>)
+                    </button>
+                    <button onclick="showGenre('comedy')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Comedy (<span id="count-comedy">0</span>)
+                    </button>
+                    <button onclick="showGenre('fantasy')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Fantasy (<span id="count-fantasy">0</span>)
+                    </button>
+                    <button onclick="showGenre('isekai')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Isekai (<span id="count-isekai">0</span>)
+                    </button>
+                    <button onclick="showGenre('psychological')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Psychological (<span id="count-psychological">0</span>)
+                    </button>
+                    <button onclick="showGenre('horror')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Horror (<span id="count-horror">0</span>)
+                    </button>
+                    <button onclick="showGenre('slice_of_life')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Slice of Life (<span id="count-slice_of_life">0</span>)
+                    </button>
+                    <button onclick="showGenre('sports')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Sports (<span id="count-sports">0</span>)
+                    </button>
+                    <button onclick="showGenre('mystery')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Mystery (<span id="count-mystery">0</span>)
+                    </button>
+                    <button onclick="showGenre('supernatural')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Supernatural (<span id="count-supernatural">0</span>)
+                    </button>
+                    <button onclick="showGenre('sci_fi')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Sci-Fi (<span id="count-sci_fi">0</span>)
+                    </button>
+                    <button onclick="showGenre('mecha')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Mecha (<span id="count-mecha">0</span>)
+                    </button>
+                    <button onclick="showGenre('historical')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Historical (<span id="count-historical">0</span>)
+                    </button>
+                    <button onclick="showGenre('drama')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        Drama (<span id="count-drama">0</span>)
+                    </button>
+                    <button onclick="showGenre('school')" class="genre-tab px-4 py-2 bg-white/20 text-white rounded-lg font-semibold hover:bg-white/30 transition-colors">
+                        School (<span id="count-school">0</span>)
+                    </button>
+                </div>
+                
+                <!-- Manga Links Container -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 max-h-96 overflow-y-auto">
+                    <div id="mangaLinksContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+                        <!-- Manga links loaded by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search and Filters -->
+        <section class="mb-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Search Bar -->
+                <div class="mb-6">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search manga by title..." 
+                            class="w-full px-6 py-4 pl-14 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors text-lg"
+                        />
+                        <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <div class="flex items-center space-x-2">
+                        <label class="text-gray-700 dark:text-gray-300 font-semibold">Status:</label>
+                        <select id="statusFilter" class="px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors">
+                            <option value="">All</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <label class="text-gray-700 dark:text-gray-300 font-semibold">Sort:</label>
+                        <select id="sortFilter" class="px-4 py-2 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors">
+                            <option value="followedCount">Popular</option>
+                            <option value="latestUploadedChapter">Latest Updates</option>
+                            <option value="createdAt">Newest</option>
+                            <option value="rating">Highest Rated</option>
+                        </select>
+                    </div>
+
+                    <button id="clearFilters" class="px-6 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors font-semibold">
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Manga Grid -->
+        <section>
+            <div id="mangaGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <!-- Manga cards will be inserted here by home.js -->
+            </div>
+
+            <!-- Loading Indicator (for infinite scroll) -->
+            <div id="loadingMore" class="hidden flex justify-center items-center py-8">
+                <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-red-500"></div>
+            </div>
+
+            <!-- End of Results Message -->
+            <div id="endOfResults" class="hidden text-center py-8 text-gray-600 dark:text-gray-400">
+                <p class="text-lg font-semibold">You've reached the end!</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-800 mt-20 py-8 border-t border-gray-200 dark:border-gray-700 transition-colors duration-300">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-600 dark:text-gray-400 mb-2">
+                <span class="font-japanese font-bold text-red-500">YoruManga</span> - Your Gateway to Manga
+            </p>
+            <p class="text-sm text-gray-500 dark:text-gray-500">
+                Powered by MangaDex API | All content belongs to their respective owners
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/manga-data.js"></script>
+    <script src="js/manga-database.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>

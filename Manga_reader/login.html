@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - YoruManga</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .font-main {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        secondary: '#1f2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-red-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 font-main min-h-screen transition-colors duration-300">
+    
+    <!-- Header -->
+    <header class="py-6">
+        <div class="container mx-auto px-4">
+            <a href="index.html" class="flex items-center space-x-2 group w-fit">
+                <div class="text-4xl font-black text-red-500 font-japanese transform group-hover:scale-110 transition-transform">
+                    夜
+                </div>
+                <span class="text-3xl font-bold text-gray-800 dark:text-white font-japanese">YoruManga</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-md mx-auto">
+            
+            <!-- Auth Card -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300">
+                
+                <!-- Tab Headers -->
+                <div class="flex border-b border-gray-200 dark:border-gray-700">
+                    <button id="loginTab" class="flex-1 py-4 font-bold text-lg transition-colors border-b-2 border-red-500 text-red-500">
+                        Login
+                    </button>
+                    <button id="registerTab" class="flex-1 py-4 font-bold text-lg text-gray-500 dark:text-gray-400 hover:text-red-500 transition-colors border-b-2 border-transparent">
+                        Register
+                    </button>
+                </div>
+
+                <!-- Login Form -->
+                <div id="loginForm" class="p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 font-japanese">Welcome Back!</h2>
+                    
+                    <form id="loginFormElement" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Username
+                            </label>
+                            <input 
+                                type="text" 
+                                id="loginUsername" 
+                                required
+                                class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors"
+                                placeholder="Enter your username"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="loginPassword" 
+                                required
+                                class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors"
+                                placeholder="Enter your password"
+                            />
+                        </div>
+
+                        <button 
+                            type="submit"
+                            class="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-bold text-lg"
+                        >
+                            Login
+                        </button>
+                    </form>
+
+                    <p class="mt-6 text-center text-gray-600 dark:text-gray-400">
+                        Don't have an account? 
+                        <button id="switchToRegister" class="text-red-500 hover:text-red-600 font-semibold">
+                            Register here
+                        </button>
+                    </p>
+                </div>
+
+                <!-- Register Form -->
+                <div id="registerForm" class="p-8 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 font-japanese">Create Account</h2>
+                    
+                    <form id="registerFormElement" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Username
+                            </label>
+                            <input 
+                                type="text" 
+                                id="registerUsername" 
+                                required
+                                minlength="3"
+                                class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors"
+                                placeholder="Choose a username (min 3 characters)"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="registerPassword" 
+                                required
+                                minlength="6"
+                                class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors"
+                                placeholder="Choose a password (min 6 characters)"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                                Confirm Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="registerPasswordConfirm" 
+                                required
+                                minlength="6"
+                                class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:border-red-500 dark:focus:border-red-400 outline-none transition-colors"
+                                placeholder="Confirm your password"
+                            />
+                        </div>
+
+                        <button 
+                            type="submit"
+                            class="w-full py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-bold text-lg"
+                        >
+                            Create Account
+                        </button>
+                    </form>
+
+                    <p class="mt-6 text-center text-gray-600 dark:text-gray-400">
+                        Already have an account? 
+                        <button id="switchToLogin" class="text-red-500 hover:text-red-600 font-semibold">
+                            Login here
+                        </button>
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Info Box -->
+            <div class="mt-8 p-6 bg-blue-50 dark:bg-blue-900 dark:bg-opacity-30 rounded-lg border-2 border-blue-200 dark:border-blue-700">
+                <h3 class="font-bold text-blue-800 dark:text-blue-300 mb-2 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Why create an account?
+                </h3>
+                <ul class="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+                    <li>✓ Read manga chapters</li>
+                    <li>✓ Bookmark your favorite manga</li>
+                    <li>✓ Track your reading history</li>
+                    <li>✓ Continue reading where you left off</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script>
+        // Tab switching
+        const loginTab = document.getElementById('loginTab');
+        const registerTab = document.getElementById('registerTab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+
+        function showLogin() {
+            loginTab.classList.add('border-red-500', 'text-red-500');
+            loginTab.classList.remove('border-transparent', 'text-gray-500');
+            registerTab.classList.remove('border-red-500', 'text-red-500');
+            registerTab.classList.add('border-transparent', 'text-gray-500');
+            loginForm.classList.remove('hidden');
+            registerForm.classList.add('hidden');
+        }
+
+        function showRegister() {
+            registerTab.classList.add('border-red-500', 'text-red-500');
+            registerTab.classList.remove('border-transparent', 'text-gray-500');
+            loginTab.classList.remove('border-red-500', 'text-red-500');
+            loginTab.classList.add('border-transparent', 'text-gray-500');
+            registerForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+        }
+
+        loginTab.addEventListener('click', showLogin);
+        registerTab.addEventListener('click', showRegister);
+        switchToRegister.addEventListener('click', showRegister);
+        switchToLogin.addEventListener('click', showLogin);
+
+        // Check URL parameter for mode
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('mode') === 'register') {
+            showRegister();
+        }
+
+        // Get redirect URL
+        const redirectUrl = urlParams.get('redirect') || 'index.html';
+
+        // Login form submission
+        document.getElementById('loginFormElement').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            const result = Auth.login(username, password);
+            
+            if (result.success) {
+                UI.showToast(result.message, 'success');
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 1000);
+            } else {
+                UI.showToast(result.message, 'error');
+            }
+        });
+
+        // Register form submission
+        document.getElementById('registerFormElement').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('registerUsername').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerPasswordConfirm').value;
+            
+            // Check password match
+            if (password !== confirmPassword) {
+                UI.showToast('Passwords do not match', 'error');
+                return;
+            }
+            
+            const result = Auth.register(username, password);
+            
+            if (result.success) {
+                UI.showToast(result.message, 'success');
+                // Auto-login after registration
+                Auth.login(username, password);
+                setTimeout(() => {
+                    window.location.href = redirectUrl;
+                }, 1000);
+            } else {
+                UI.showToast(result.message, 'error');
+            }
+        });
+
+        // Redirect if already logged in
+        if (Auth.isLoggedIn()) {
+            window.location.href = redirectUrl;
+        }
+    </script>
+</body>
+</html>

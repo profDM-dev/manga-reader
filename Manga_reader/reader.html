@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading - YoruManga</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .font-japanese {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .font-main {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Reader-specific styles */
+        .reader-page {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        /* Hide scrollbar but keep functionality */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#dc2626',
+                        secondary: '#1f2937',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black font-main">
+    
+    <!-- Reader Controls (Top Bar) -->
+    <div id="readerControls" class="fixed top-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-95 backdrop-blur-sm transition-transform duration-300">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Back Button -->
+                <button id="backBtn" class="flex items-center space-x-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    <span>Back</span>
+                </button>
+                
+                <!-- Chapter Info -->
+                <div class="text-center text-white">
+                    <h1 id="chapterTitle" class="text-lg font-bold">Loading...</h1>
+                    <p id="mangaTitle" class="text-sm text-gray-400"></p>
+                </div>
+                
+                <!-- Settings -->
+                <div class="flex items-center space-x-2">
+                    <button id="toggleControls" class="p-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors" title="Toggle controls">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reader Content -->
+    <div id="readerContainer" class="pt-16 pb-24 min-h-screen">
+        <div id="pagesContainer" class="max-w-5xl mx-auto">
+            <!-- Pages will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Reader Controls (Bottom Bar) -->
+    <div id="bottomControls" class="fixed bottom-0 left-0 right-0 z-50 bg-gray-900 bg-opacity-95 backdrop-blur-sm transition-transform duration-300">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between max-w-4xl mx-auto">
+                <!-- Previous Chapter -->
+                <button id="prevChapterBtn" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span>Previous</span>
+                </button>
+                
+                <!-- Page Progress -->
+                <div class="text-center text-white">
+                    <p id="pageProgress" class="text-sm font-semibold">Page 0 of 0</p>
+                </div>
+                
+                <!-- Next Chapter -->
+                <button id="nextChapterBtn" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2">
+                    <span>Next</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+        <div class="text-center">
+            <div class="animate-spin rounded-full h-20 w-20 border-t-4 border-b-4 border-red-500 mb-4 mx-auto"></div>
+            <p class="text-white text-xl font-semibold">Loading chapter...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/reader.js"></script>
+</body>
+</html>
